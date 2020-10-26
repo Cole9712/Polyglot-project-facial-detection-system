@@ -10,3 +10,12 @@ May also implement other functions such as face similarity and login system.
 - JavaScript
 - Go
 - Python with Anaconda
+
+## Inter-language communication methods
+
+- message queue (RabbitMQ)
+- REST API
+
+## Deployment technology
+
+Docker Containers
