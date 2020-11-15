@@ -6,8 +6,6 @@ import (
 	"fmt"
 	"image"
 	"image/jpeg"
-	_ "image/jpeg"
-	"io"
 	"log"
 	"net/http"
 	"os"
@@ -35,13 +33,13 @@ func parseImageJSON(r *http.Request, w http.ResponseWriter) (imageGot, error) {
 // Save a JPG to ./output/
 func saveJPG(input image.Image) string {
 	fileName := "tempPic.jpg"
-	f, err := os.OpenFile(fileName,os.O_WRONLY|os.O_CREATE, 0777)
+	f, err := os.OpenFile(fileName, os.O_WRONLY|os.O_CREATE, 0777)
 	if err != nil {
 		log.Fatal(err)
 		return "error: saveJPG openFile"
 	}
 
-	err = jpeg.Encode(f, input, &jpeg.Options{Quality:100})
+	err = jpeg.Encode(f, input, &jpeg.Options{Quality: 100})
 	if err != nil {
 		log.Fatal(err)
 		return "error: saveJPG jpeg.Encode"
@@ -53,9 +51,9 @@ func saveJPG(input image.Image) string {
 
 // adapted from https://github.com/rravishankar/golangtraining/tree/master/test/jpegencode
 //convert base64 string to image file (JPG)
-func saveBase64(input string, format string) string{
+func saveBase64(input string, format string) string {
 	reader := base64.NewDecoder(base64.StdEncoding, strings.NewReader(input))
-	i, fs, err := image.Decode(reader)
+	i, _, err := image.Decode(reader)
 	if err != nil {
 		log.Fatal(err)
 		return "error: saveBase64"
