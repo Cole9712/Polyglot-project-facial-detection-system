@@ -1,4 +1,4 @@
-package serverGo
+package main
 
 import (
 	"testing"

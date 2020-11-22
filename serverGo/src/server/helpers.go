@@ -1,4 +1,4 @@
-package serverGo
+package main
 
 import (
 	"encoding/base64"
@@ -32,7 +32,7 @@ func parseImageJSON(r *http.Request, w http.ResponseWriter) (imageGot, error) {
 
 // Save a JPG to ./output/
 func saveJPG(input image.Image) string {
-	fileName := "tempPic.jpg"
+	fileName := "/output/tempPic.jpg"
 	f, err := os.OpenFile(fileName, os.O_WRONLY|os.O_CREATE, 0777)
 	if err != nil {
 		log.Fatal(err)
@@ -50,7 +50,7 @@ func saveJPG(input image.Image) string {
 }
 
 // adapted from https://github.com/rravishankar/golangtraining/tree/master/test/jpegencode
-//convert base64 string to image file (JPG)
+// convert base64 string to image file (JPG)
 func saveBase64(input string, format string) string {
 	reader := base64.NewDecoder(base64.StdEncoding, strings.NewReader(input))
 	i, _, err := image.Decode(reader)
