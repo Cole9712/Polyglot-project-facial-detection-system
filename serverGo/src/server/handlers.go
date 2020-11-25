@@ -1,15 +1,17 @@
 package main
 
 import (
+	"encoding/json"
 	"log"
 	"net/http"
-	"encoding/json"
 
 	"github.com/julienschmidt/httprouter"
 )
 
 type Response struct {
-	ImageURL string `json:"ImageURL"`
+	Success bool    `json:"success"`
+	Error   *string `json:"error"`
+	Url     string  `json:"url"`
 }
 
 func indexHandler(router *httprouter.Router) httprouter.Handle {
@@ -22,17 +24,43 @@ func indexHandler(router *httprouter.Router) httprouter.Handle {
 		if message != "success!" {
 			panic("save Base64 to file unsuccessfully")
 		}
-		
-		var returnURL string = "http://localhost:8081/"
+
+		// var returnURL string = "http://localhost:8081/"
 		fs := http.FileServer(http.Dir("/output/tempPic.jpg"))
 		log.Fatal(http.ListenAndServe(":8081", fs))
 		w.Header().Set("Content-Type", "application/json")
 		w.WriteHeader(http.StatusOK)
-		err = json.NewEncoder(w).Encode(Response{returnURL})
-		if err != nil {
-			panic(err)
-		}
+		// err = json.NewEncoder(w).Encode(Response{returnURL})
+		// if err != nil {
+		// 	panic(err)
+		// }
 
 	}
+}
+
+
+func fileUploadHandler(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
+	r.ParseMultipartForm(32 << 20)
+	log.Println("received request for uploading image")
+
+	flag, err, filePath := saveFile(r, "uploadFileObj")
+	if !flag {
+		panic(err)
+	}
+	
+	// prevernt CORS issue
+	w.Header().Set("Access-Control-Allow-Methods", " GET, POST, PATCH, PUT, DELETE, OPTIONS")
+	w.Header().Set("Access-Control-Allow-Origin", "*")
+	w.Header().Set("Access-Control-Allow-Headers", "Origin, Content-Type, X-Auth-Token")
+	response := Response{true, nil, "http://localhost:8082/" + filePath}	
+	w.Header().Set("Content-Type", "application/json")
+	json.NewEncoder(w).Encode(response)
+	if err != nil {
+		panic(err)
+	}
+	w.WriteHeader(http.StatusOK)
+
+	// w.WriteHeader(http.StatusCreated)
+    
 
 }

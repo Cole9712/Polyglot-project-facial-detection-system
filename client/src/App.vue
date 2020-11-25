@@ -2,11 +2,15 @@
   <div id="app">
     <div>
       <b-navbar type="dark" variant="dark">
-        <b-navbar-brand tag="h1" href="#">Facial Detection Project</b-navbar-brand>
+        <b-navbar-brand tag="h1" href="#">🚀Facial Detection Project🚀</b-navbar-brand>
         <b-collapse is-nav>
           <b-navbar-nav>
             <b-nav-item @click='$router.push({name:"Home"})'>Home</b-nav-item>
             <b-nav-item @click='$router.push({name:"UploadMine"})'>Upload My Image</b-nav-item>
+          </b-navbar-nav>
+          <!-- right align content -->
+          <b-navbar-nav class="ml-auto">
+            <b-nav-item disabled></b-nav-item>
           </b-navbar-nav>
         </b-collapse>
       </b-navbar>

@@ -1,40 +1,41 @@
 <template>
-  <div class="UploadMine container">
-    <b-jumbotron fluid="true" header-level="4" header="Upload your own image file to detect!" bg-variant="white">
-      <p class="my-5 text-left font-weight-light" style="font-size:150%;">Max image size: 2MB</p>
+  <div class="UploadMine container-fluid" 
+    style="background-attachment:default;
+    background-size:cover;
+    height: 100vh;"
+    :style="{ backgroundImage: `url('https://pixabay.com/get/52e0d4424350ae14f6d1867dda293e7e1337d7e6514c704f752979d39e4ac55d_1920.jpg')` }">
+
+    <b-jumbotron text-variant="light" class="mb-1 pb-1" fluid="true" header-level="4" header="Upload your own image file!" bg-variant="transparent">
+      <p class="my-5 text-left font-weight-light pl-4" style="font-size:150%;">Max image size: 10MB</p>
     </b-jumbotron>
+    <v-uploader
+    @done="vUploadDone"
+    file-size-limit='10MB'
+    :preview-width="800"
+    :preview-height="600"
+    button-text='Upload for Facial Detection'
+    language='en'
+    />
     
-    <vue-base64-file-upload 
-        class="v1"
-        accept="image/png,image/jpeg"
-        image-class="v1-image"
-        input-class="v1-input"
-        :max-size="customImageMaxSize"
-        @size-exceeded="onSizeExceeded"
-        @load="onLoad" />
   </div>
 </template>
 
 <script>
-// Adapted from https://github.com/dhhb/vue-base64-file-upload
-import VueBase64FileUpload from "vue-base64-file-upload";
+
 export default {
   components: {
-    VueBase64FileUpload,
+
   },
   data() {
     return {
-      // set max image size to 2 Mega Bytes
-      customImageMaxSize: 2,
+      
     };
   },
   methods: {
-    onLoad(dataurl) {
-      console.log(dataurl)
-    },
-    onSizeExceeded(size) {
-      alert(`Image ${size}Mb size exceeds limits of ${this.customImageMaxSize}Mb!`);
-    },
+    vUploadDone(f) {
+      console.log(f)
+    }
   },
 };
 </script>
+

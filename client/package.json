@@ -12,6 +12,7 @@
     "bootstrap": "^4.5.3",
     "bootstrap-vue": "^2.19.0",
     "core-js": "^3.6.5",
+    "v-uploader": "^1.8.0",
     "vue": "^2.6.12",
     "vue-base64-file-upload": "^1.0.4",
     "vue-navigation-bar": "^4.1.0",
@@ -39,7 +40,10 @@
     "parserOptions": {
       "parser": "babel-eslint"
     },
-    "rules": {}
+    "rules": {
+      "strict": "off",
+      "no-unused-vars": "off"
+    }
   },
   "browserslist": [
     "> 1%",
