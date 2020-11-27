@@ -12,8 +12,8 @@ func main() {
 	// fileRouter := httprouter.New()
 	// router.GET("/", indexHandler(router))
 	router.POST("/uploadMine", fileUploadHandler)
-	router.ServeFiles("/*filepath", http.Dir("./output"))
-
+	router.ServeFiles("/*filepath", http.Dir("../serverPy/output"))
+	
 	log.Fatal(http.ListenAndServe(":8082", router))
 	// log.Fatal(http.ListenAndServe(":8081", fileRouter))
 }

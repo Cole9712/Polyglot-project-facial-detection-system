@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"log"
 	"net/http"
+	"os/exec"
 
 	"github.com/julienschmidt/httprouter"
 )
@@ -47,6 +48,11 @@ func fileUploadHandler(w http.ResponseWriter, r *http.Request, p httprouter.Para
 	if !flag {
 		panic(err)
 	}
+
+	// TODO: Change to docker environment
+	cmd := exec.Command("python3","main.py",filePath)
+	cmd.Dir("~/facialdecectionwebsit")
+	
 	
 	// prevernt CORS issue
 	w.Header().Set("Access-Control-Allow-Methods", " GET, POST, PATCH, PUT, DELETE, OPTIONS")
