@@ -1,4 +1,4 @@
-module.exports={
-    devServer: {
-        proxy: 'https://localhost:8082'
-}
+// module.exports={
+//     devServer: {
+//         proxy: 'https://localhost:8082'
+// }

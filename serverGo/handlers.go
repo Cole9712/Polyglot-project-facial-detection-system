@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"log"
 	"net/http"
+	"os"
 	"os/exec"
 
 	"github.com/julienschmidt/httprouter"
@@ -39,7 +40,6 @@ func indexHandler(router *httprouter.Router) httprouter.Handle {
 	}
 }
 
-
 func fileUploadHandler(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
 	r.ParseMultipartForm(32 << 20)
 	log.Println("received request for uploading image")
@@ -49,15 +49,21 @@ func fileUploadHandler(w http.ResponseWriter, r *http.Request, p httprouter.Para
 		panic(err)
 	}
 
-	cmd := exec.Command("python3","main.py",filePath)
+	// invoke python program via Command line execution
+	cmd := exec.Command("python3", "main.py", filePath)
+	cmd.Stdout = os.Stdout
+	cmd.Stderr = os.Stderr
+	err = cmd.Run()
+	if err != nil {
+		log.Fatal("cmd Run failed")
+		panic(err)
+	}
 
-	
-	
 	// prevernt CORS issue
 	w.Header().Set("Access-Control-Allow-Methods", " GET, POST, PATCH, PUT, DELETE, OPTIONS")
 	w.Header().Set("Access-Control-Allow-Origin", "*")
 	w.Header().Set("Access-Control-Allow-Headers", "Origin, Content-Type, X-Auth-Token")
-	response := Response{true, nil, "http://localhost:8082/" + filePath}	
+	response := Response{true, nil, "http://localhost:8082/" + filePath}
 	w.Header().Set("Content-Type", "application/json")
 	json.NewEncoder(w).Encode(response)
 	if err != nil {
@@ -66,6 +72,5 @@ func fileUploadHandler(w http.ResponseWriter, r *http.Request, p httprouter.Para
 	w.WriteHeader(http.StatusOK)
 
 	// w.WriteHeader(http.StatusCreated)
-    
 
 }

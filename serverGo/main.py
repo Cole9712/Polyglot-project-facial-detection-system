@@ -36,10 +36,10 @@ if __name__ == "__main__":
     if numOfArgvs == 0:
         sys.exit("Too few arguments")
     fileName = sys.argv[1]
-    pic = cv2.imread('../serverGo/output/' + fileName, cv2.IMREAD_COLOR)
+    pic = cv2.imread('output/' + fileName, cv2.IMREAD_COLOR)
 
     # pic = convertToBGR(pic)
     result = face_detect(pic)
 
-    cv2.imwrite("output/" + fileName, result)
+    cv2.imwrite("facialOutput/" + fileName, result)
     cv2.destroyAllWindows()
