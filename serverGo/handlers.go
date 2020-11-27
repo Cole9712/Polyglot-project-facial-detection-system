@@ -49,9 +49,8 @@ func fileUploadHandler(w http.ResponseWriter, r *http.Request, p httprouter.Para
 		panic(err)
 	}
 
-	// TODO: Change to docker environment
 	cmd := exec.Command("python3","main.py",filePath)
-	cmd.Dir("~/facialdecectionwebsit")
+
 	
 	
 	// prevernt CORS issue
