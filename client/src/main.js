@@ -2,8 +2,8 @@ import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
 import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
-// Adapted from https://github.com/TerryZ/v-uploader
-import vUploader from 'v-uploader'
+// vUploader is Adapted from https://github.com/TerryZ/v-uploader
+import vUploader from './components/uploader_index'
 
 const uploaderConfig = {
   uploadFileUrl: 'http://localhost:8082/uploadMine',
@@ -15,6 +15,8 @@ const uploaderConfig = {
     vue.$dlg.alert(message, null, { messageType: 'error' })
   }
 }
+
+
 
 Vue.config.productionTip = false
 // Install BootstrapVue
