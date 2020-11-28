@@ -9,6 +9,7 @@ import (
 
 func main() {
 	router := httprouter.New()
+	log.Print("REST Server Started")
 	// fileRouter := httprouter.New()
 	// router.GET("/", indexHandler(router))
 	router.POST("/uploadMine", fileUploadHandler)
