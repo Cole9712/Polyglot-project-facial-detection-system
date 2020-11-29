@@ -5,7 +5,8 @@ ubuntu_version = '20.04'
 username = 'vagrant'
 user_home = '/home/' + username
 project_home = user_home + '/project/' # you may need to change the working directory to match your project
-
+client_home = project_home + '/client/'
+server_home = project_home + '/serverGo/'
 
 python3_packages = '/usr/local/lib/python3.8/dist-packages'
 ruby_gems = '/var/lib/gems/2.7.0/gems/'
@@ -68,17 +69,32 @@ package ['nodejs']
 
 execute 'snap install --classic go' do
 end
-
-directory '/project/client/'
+execute 'npm install' do
+  cwd client_home
+  user username
+  environment 'HOME' => user_home
+end
 execute 'npm install --save-dev node-sass' do
+  cwd client_home
+  user username
+  environment 'HOME' => user_home
 end
 execute 'npm install holderjs' do
+  cwd client_home
+  user username
+  environment 'HOME' => user_home
 end
 execute 'npm install fine-uploader' do
+  cwd client_home
+  user username
+  environment 'HOME' => user_home
 end
-execute 'npm install' do
-end
+
+
 execute 'npm run serve' do
+  cwd client_home
+  user username
+  environment 'HOME' => user_home
 end
 
 
