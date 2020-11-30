@@ -2,6 +2,7 @@ ubuntu_mirror = 'http://archive.ubuntu.com/ubuntu/'
 # ubuntu_mirror = 'http://mirror.rcg.sfu.ca/mirror/ubuntu/'
 ubuntu_release = 'focal'
 ubuntu_version = '20.04'
+rootname = 'root'
 username = 'vagrant'
 user_home = '/home/' + username
 project_home = user_home + '/project/' # you may need to change the working directory to match your project
@@ -54,48 +55,54 @@ package ['python3', 'python3-pip', 'python3-dev']  # Python
 
 # NodeJS (more modern than Ubuntu nodejs package) and NPM
 
-remote_file '/opt/installers/node-setup.sh' do
- source 'https://deb.nodesource.com/setup_14.x'
- mode '0755'
-end
-execute '/opt/installers/node-setup.sh' do
- creates '/etc/apt/sources.list.d/nodesource.list'
- notifies :run, 'execute[apt-get update]', :immediately
-end
-package ['nodejs']
+# remote_file '/opt/installers/node-setup.sh' do
+#  source 'https://deb.nodesource.com/setup_14.x'
+#  mode '0755'
+# end
+# execute '/opt/installers/node-setup.sh' do
+#  creates '/etc/apt/sources.list.d/nodesource.list'
+#  notifies :run, 'execute[apt-get update]', :immediately
+# end
+package ['nodejs','npm']
 
 
 # Go (more modern than Ubuntu golang-go package)
 
 execute 'snap install --classic go' do
 end
+execute 'npm install -g @vue/cli' do
+  user rootname
+  environment 'HOME' => user_home
+  returns [0,1]
+end
+
 execute 'npm install' do
   cwd client_home
-  user username
+  user rootname
   environment 'HOME' => user_home
 end
-execute 'npm install --save-dev node-sass' do
-  cwd client_home
-  user username
-  environment 'HOME' => user_home
-end
-execute 'npm install holderjs' do
-  cwd client_home
-  user username
-  environment 'HOME' => user_home
-end
-execute 'npm install fine-uploader' do
-  cwd client_home
-  user username
-  environment 'HOME' => user_home
-end
+# execute 'npm install --save-dev node-sass' do
+#   cwd client_home
+#   user username
+#   environment 'HOME' => user_home
+# end
+# execute 'npm install holderjs' do
+#   cwd client_home
+#   user username
+#   environment 'HOME' => user_home
+# end
+# execute 'npm install fine-uploader' do
+#   cwd client_home
+#   user username
+#   environment 'HOME' => user_home
+# end
 
 
-execute 'npm run serve' do
-  cwd client_home
-  user username
-  environment 'HOME' => user_home
-end
+# execute 'npm run serve' do
+#   cwd client_home
+#   user username
+#   environment 'HOME' => user_home
+# end
 
 
 
