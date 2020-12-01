@@ -60,10 +60,10 @@ func fileUploadHandler(w http.ResponseWriter, r *http.Request, p httprouter.Para
 	}
 
 	// prevernt CORS issue
-	w.Header().Set("Access-Control-Allow-Methods", " GET, POST, PATCH, PUT, DELETE, OPTIONS")
-	w.Header().Set("Access-Control-Allow-Origin", "*")
-	w.Header().Set("Access-Control-Allow-Headers", "Origin, Content-Type, X-Auth-Token")
-	response := Response{true, nil, "http://0.0.0.0:8082/" + filePath}
+	// w.Header().Set("Access-Control-Allow-Methods", " GET, POST, PATCH, PUT, DELETE, OPTIONS")
+	// w.Header().Set("Access-Control-Allow-Origin", "*")
+	// w.Header().Set("Access-Control-Allow-Headers", "Origin, Content-Type, X-Auth-Token")
+	response := Response{true, nil, "http://127.0.0.1:8082/" + filePath}
 	w.Header().Set("Content-Type", "application/json")
 	json.NewEncoder(w).Encode(response)
 	if err != nil {

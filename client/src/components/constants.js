@@ -80,7 +80,7 @@ const buildOptions = function(){
             }
         },
         deleteFile: {
-            enabled: true,
+            enabled: false,
             method: "POST"//,
             //'endpoint' : $webroot + 'upload/deleteUploadFile'
         },
@@ -101,6 +101,10 @@ const buildOptions = function(){
             onComplete: function(id,name,json,xhr){},
             //the callback before delete file, return false can stop it.
             onSubmitDelete: function(id){}
+        },
+        cors: {
+            expected: true,
+            sendCredentials: false,
         }
     };
     if(this.language && this.language === 'cn'){

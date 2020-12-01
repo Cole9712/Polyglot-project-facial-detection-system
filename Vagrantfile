@@ -70,6 +70,6 @@ Vagrant.configure("2") do |config|
   end
 
   config.vm.network "forwarded_port", guest: 8080, host: 5555, host_ip: "127.0.0.1"
-  # config.vm.network "forwarded_port", guest: 8082, host: 8082, host_ip: "127.0.0.2"
+  config.vm.network "forwarded_port", guest: 8082, host: 8082, host_ip: "127.0.0.1"
 
 end

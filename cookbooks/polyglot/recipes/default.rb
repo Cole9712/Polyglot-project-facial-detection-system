@@ -40,7 +40,9 @@ package ['build-essential', 'cmake']
 
 # Other core language tools you might want
 
-package ['python3', 'python3-pip', 'python3-dev']  # Python
+package ['python3', 'python3-pip', 'python3-dev', 'libgl1-mesa-glx']  # Python
+execute 'pip3 install opencv-python numpy' do
+end
 #package ['ghc', 'libghc-random-dev', 'cabal-install']  # Haskell
 # package 'golang-go'  # Go
 #package 'erlang'  # Erlang
