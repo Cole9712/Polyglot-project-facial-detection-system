@@ -14,7 +14,6 @@ func main() {
 	// router.GET("/", indexHandler(router))
 	router.POST("/uploadMine", fileUploadHandler)
 	router.ServeFiles("/*filepath", http.Dir("./facialOutput"))
-	
-	log.Fatal(http.ListenAndServe(":8082", router))
-	// log.Fatal(http.ListenAndServe(":8081", fileRouter))
+
+	log.Fatal(http.ListenAndServe("0.0.0.0:8082", router))
 }

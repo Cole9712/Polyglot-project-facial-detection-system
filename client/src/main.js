@@ -6,7 +6,7 @@ import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
 import vUploader from './components/uploader_index'
 
 const uploaderConfig = {
-  uploadFileUrl: 'http://localhost:8082/uploadMine',
+  uploadFileUrl: 'http://0.0.0.0:8082/uploadMine',
   // For testing purposes
   // uploadFileUrl: 'https://api.imgur.com/3/image',
   deleteFileUrl: '',
