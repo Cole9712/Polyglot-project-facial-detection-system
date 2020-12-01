@@ -54,6 +54,7 @@ Vagrant.configure("2") do |config|
     # speed up boot: https://bugs.launchpad.net/cloud-images/+bug/1829625
     vb.customize ["modifyvm", :id, "--uart1", "0x3F8", "4"]
     vb.customize ["modifyvm", :id, "--uartmode1", "file", File::NULL]
+    vb.customize ["setextradata", :id, "VBoxInternal2/SharedFoldersEnableSymlinksCreate/v-root", "1"]
   end
   #
   # View the documentation for the provider you are using for more
@@ -67,5 +68,8 @@ Vagrant.configure("2") do |config|
     chef.add_recipe "polyglot"
     chef.arguments = "--chef-license accept"
   end
+
+  config.vm.network "forwarded_port", guest: 8080, host: 5555, host_ip: "127.0.0.1"
+  # config.vm.network "forwarded_port", guest: 8082, host: 8082, host_ip: "127.0.0.2"
 
 end

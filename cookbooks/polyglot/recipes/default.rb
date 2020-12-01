@@ -55,16 +55,29 @@ package ['python3', 'python3-pip', 'python3-dev']  # Python
 
 # NodeJS (more modern than Ubuntu nodejs package) and NPM
 
-# remote_file '/opt/installers/node-setup.sh' do
-#  source 'https://deb.nodesource.com/setup_14.x'
-#  mode '0755'
-# end
-# execute '/opt/installers/node-setup.sh' do
-#  creates '/etc/apt/sources.list.d/nodesource.list'
-#  notifies :run, 'execute[apt-get update]', :immediately
-# end
-package ['nodejs','npm']
+remote_file '/opt/installers/node-setup.sh' do
+ source 'https://deb.nodesource.com/setup_14.x'
+ mode '0755'
+end
+execute '/opt/installers/node-setup.sh' do
+ creates '/etc/apt/sources.list.d/nodesource.list'
+ notifies :run, 'execute[apt-get update]', :immediately
+end
+package ['nodejs']
 
+# change node_modules dir
+directory '/opt/node_modules' do
+  owner username
+end
+link project_home + '/client/node_modules' do
+  to '/opt/node_modules'
+end
+
+execute 'npm install' do
+  cwd client_home
+  user username
+  environment 'HOME' => user_home
+end
 
 # Go (more modern than Ubuntu golang-go package)
 
@@ -76,11 +89,18 @@ execute 'npm install -g @vue/cli' do
   returns [0,1]
 end
 
-execute 'npm install' do
+execute 'npm run serve' do
   cwd client_home
-  user rootname
+  user username
   environment 'HOME' => user_home
 end
+
+# execute 'npm install' do
+#   cwd client_home
+#   user rootname
+#   environment 'HOME' => user_home
+# end
+
 # execute 'npm install --save-dev node-sass' do
 #   cwd client_home
 #   user username
@@ -98,11 +118,7 @@ end
 # end
 
 
-# execute 'npm run serve' do
-#   cwd client_home
-#   user username
-#   environment 'HOME' => user_home
-# end
+
 
 
 
