@@ -1,2 +1,6 @@
-/output/*
-/facialOutput/*
+output/*
+facialOutput/*
+
+# exception to the rule
+!output/placeHolder
+!facialOutput/placeHolder
