@@ -40,8 +40,8 @@ package ['build-essential', 'cmake']
 
 # Other core language tools you might want
 
-package ['python3', 'python3-pip', 'python3-dev', 'libgl1-mesa-glx']  # Python
-execute 'pip3 install opencv-python numpy' do
+package ['python3', 'python3-pip', 'python3-dev', 'libgl1-mesa-glx', 'liblapack-dev' ]  # Python
+execute 'pip3 install opencv-python numpy dlib' do
 end
 #package ['ghc', 'libghc-random-dev', 'cabal-install']  # Haskell
 # package 'golang-go'  # Go
@@ -91,11 +91,11 @@ execute 'npm install -g @vue/cli' do
   returns [0,1]
 end
 
-execute 'npm run serve' do
-  cwd client_home
-  user username
-  environment 'HOME' => user_home
-end
+# execute 'npm run serve' do
+#   cwd client_home
+#   user username
+#   environment 'HOME' => user_home
+# end
 
 # execute 'npm install' do
 #   cwd client_home
