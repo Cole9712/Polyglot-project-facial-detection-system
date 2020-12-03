@@ -5,7 +5,7 @@
     height: 100vh;"
     :style="{ backgroundImage: `url('${bgimage}')` }">
 
-    <b-jumbotron text-variant="light" class="mb-1 pb-1" :fluid='true' header-level="4" header="Upload your own image file!" bg-variant="transparent">
+    <b-jumbotron text-variant="light" class="mb-1 pb-1" :fluid='true' header-level="4" header="Upload Image to Perform Facial Detection" bg-variant="transparent">
       <p class="my-5 text-left font-weight-light pl-4" style="font-size:150%;">Max image size: 10MB</p>
     </b-jumbotron>
     <v-uploader
@@ -21,20 +21,39 @@
 </template>
 
 <script>
-export default {
-  components: {
+  import Vue from 'vue'
+  // vUploader is Adapted from https://github.com/TerryZ/v-uploader
+  import vUploader from '../components/uploader_index'
+  
+  export default {
+    components: {
 
-  },
-  data() {
-    return {
-      bgimage: require('../assets/bg1.jpg')
-    };
-  },
-  methods: {
-    vUploadDone(f) {
-      console.log(f)
+    },
+    data() {
+      return {
+        bgimage: require('../assets/bg1.jpg')
+      };
+    },
+    methods: {
+      vUploadDone(f) {
+        console.log(f)
+      }
+    },
+    created() {
+      const uploaderConfig = {
+        // For Vagrant
+        // uploadFileUrl: 'http://localhost:5555/uploadMine',
+        // For Dev purposes
+        uploadFileUrl: 'http://localhost:8082/uploadMine',
+        // uploadFileUrl: 'https://api.imgur.com/3/image',
+        deleteFileUrl: '',
+        showMessage: (vue, message) => {
+          // using v-dialogs to show message
+          vue.$dlg.alert(message, null, { messageType: 'error' })
+        }
+      };
+      Vue.use(vUploader, uploaderConfig);
     }
-  },
-};
+  };
 </script>
 
