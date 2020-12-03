@@ -42,9 +42,9 @@
     created() {
       const uploaderConfig = {
         // For Vagrant
-        // uploadFileUrl: 'http://localhost:5555/uploadMine',
+        uploadFileUrl: 'http://localhost:5555/uploadMine',
         // For Dev purposes
-        uploadFileUrl: 'http://localhost:8082/uploadMine',
+        // uploadFileUrl: 'http://localhost:8082/uploadMine',
         // uploadFileUrl: 'https://api.imgur.com/3/image',
         deleteFileUrl: '',
         showMessage: (vue, message) => {
