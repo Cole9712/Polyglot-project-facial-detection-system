@@ -15,6 +15,7 @@ func main() {
 	// fileRouter := httprouter.New()
 	// router.GET("/", indexHandler(router))
 	router.POST("/uploadMine", fileUploadHandler)
+	router.POST("/uploadMine/swap", swapRequestHandler)
 	router.ServeFiles("/*filepath", http.Dir("./facialOutput"))
 	corsHandler := cors.Default().Handler(router)
 	log.Fatal(http.ListenAndServe("0.0.0.0:8082", corsHandler))

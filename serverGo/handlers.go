@@ -16,28 +16,37 @@ type Response struct {
 	Url     string  `json:"url"`
 }
 
-func indexHandler(router *httprouter.Router) httprouter.Handle {
-	return func(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
-		img, err := parseImageJSON(r, w)
-		if err != nil {
-			panic("Error parseImageJSON")
-		}
-		message := saveBase64(img.ImageBase64, img.ImageType)
-		if message != "success!" {
-			panic("save Base64 to file unsuccessfully")
-		}
+type SwapRequest struct {
+	File1 string `json:"file1"`
+	File2 string `json:"file2"`
+}
 
-		// var returnURL string = "http://localhost:8081/"
-		fs := http.FileServer(http.Dir("/output/tempPic.jpg"))
-		log.Fatal(http.ListenAndServe(":8081", fs))
-		w.Header().Set("Content-Type", "application/json")
-		w.WriteHeader(http.StatusOK)
-		// err = json.NewEncoder(w).Encode(Response{returnURL})
-		// if err != nil {
-		// 	panic(err)
-		// }
-
+func swapRequestHandler(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
+	var sr SwapRequest
+	err := json.NewDecoder(r.Body).Decode(&sr)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusBadRequest)
+		return
 	}
+	cmd := exec.Command("python3", "main.py", "swap", sr.File1, sr.File2)
+	cmd.Stdout = os.Stdout
+	cmd.Stderr = os.Stderr
+	err = cmd.Run()
+	if err != nil {
+		log.Fatal("cmd Run failed")
+		http.Error(w, err.Error(), http.StatusBadRequest)
+		return
+	}
+
+	response := Response{true, nil, "http://127.0.0.1:8082/" + sr.File1}
+	w.Header().Set("Content-Type", "application/json")
+	json.NewEncoder(w).Encode(response)
+	if err != nil {
+		panic(err)
+	}
+	w.WriteHeader(http.StatusOK)
+	log.Println("Response sent with StatusOK")
+
 }
 
 func fileUploadHandler(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
@@ -50,7 +59,7 @@ func fileUploadHandler(w http.ResponseWriter, r *http.Request, p httprouter.Para
 	}
 
 	// invoke python program via Command line execution
-	cmd := exec.Command("python3", "main.py", filePath)
+	cmd := exec.Command("python3", "main.py", "detect", filePath)
 	cmd.Stdout = os.Stdout
 	cmd.Stderr = os.Stderr
 	err = cmd.Run()
