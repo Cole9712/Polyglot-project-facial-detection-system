@@ -28,6 +28,7 @@
       button-text="Upload for Face Swap"
       language="en"
       :before-upload="beforeUpload"
+      :item-limit=2
     />
   </div>
 </template>
@@ -36,25 +37,38 @@
 import Vue from "vue";
 import vUploader from "../components/uploader_index";
 import Axios from "axios";
+import imageDisplay from "../components/imageDisplay";
 export default {
   components: {},
   data() {
     return {
+      receiveURL: null,
       imageList: [],
       bgimage: require("../assets/bg1.jpg"),
       swapResponse: null,
     };
   },
   methods: {
+    openResultModal() {
+      this.$dlg.modal(imageDisplay, {
+        title : "Have Fun 😉",
+        width: 800,
+        height: 700,
+        params: {
+          url: this.receiveURL
+        }
+      }
+        
+      )
+    },
     loadingImg() {
-      const key = this.$dlg.mask("Processing...   Have Fun 😉", function () {
-        console.log("Mask closed.");
-      });
+      const key = this.$dlg.mask("Processing...  ", () => (this.openResultModal()));
       Axios.post("http://localhost:5555/uploadMine/swap", {
         file1: this.imageList[0],
         file2: this.imageList[1],
       }).then((response) => (this.swapResponse = response,
-        console.log(this.swapResponse),
+        this.receiveURL = response.data.url,
+        console.log(this.receiveURL),
         this.$dlg.close(key)
       ));
       
@@ -87,17 +101,17 @@ export default {
         this.imageList.push(name);
         // console.log(this.imageList)
       }
-      if (id === 2) {
-        this.$dlg.alert(
-          "Exceeded maximum images: 2 \n Uploading interrupted.",
-          null,
-          {
-            messageType: "error",
-            language: "en",
-          }
-        );
-        return false;
-      }
+      // if (id === 2) {
+      //   this.$dlg.alert(
+      //     "Exceeded maximum images: 2 \n Uploading interrupted.",
+      //     null,
+      //     {
+      //       messageType: "error",
+      //       language: "en",
+      //     }
+      //   );
+      //   return false;
+      // }
       // console.log("id is:"+id+" file ext is:"+fileExt);
       return true;
     },
