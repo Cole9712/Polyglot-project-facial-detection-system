@@ -9,13 +9,13 @@ import (
 )
 
 func main() {
-	
+
 	router := httprouter.New()
 	log.Print("REST Server Started")
 	// fileRouter := httprouter.New()
 	// router.GET("/", indexHandler(router))
-	router.POST("/uploadMine", fileUploadHandler)
-	router.POST("/uploadMine/swap", swapRequestHandler)
+	router.POST("/uploadMinePost", fileUploadHandler)
+	router.POST("/uploadMinePost/swap", swapRequestHandler)
 	router.ServeFiles("/*filepath", http.Dir("./facialOutput"))
 	corsHandler := cors.Default().Handler(router)
 	log.Fatal(http.ListenAndServe("0.0.0.0:8082", corsHandler))

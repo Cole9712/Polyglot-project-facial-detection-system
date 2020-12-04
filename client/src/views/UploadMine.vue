@@ -42,10 +42,9 @@
     created() {
       const uploaderConfig = {
         // For Vagrant
-        uploadFileUrl: 'http://localhost:5555/uploadMine',
+        uploadFileUrl: 'http://127.0.0.1:5555/uploadMinePost',
         // For Dev purposes
-        // uploadFileUrl: 'http://localhost:8082/uploadMine',
-        // uploadFileUrl: 'https://api.imgur.com/3/image',
+        // uploadFileUrl: 'http://localhost:8082/uploadMinePost',
         deleteFileUrl: '',
         showMessage: (vue, message) => {
           // using v-dialogs to show message

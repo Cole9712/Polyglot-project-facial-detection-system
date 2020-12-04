@@ -63,7 +63,7 @@ export default {
     },
     loadingImg() {
       const key = this.$dlg.mask("Processing...  ", () => (this.openResultModal()));
-      Axios.post("http://localhost:5555/uploadMine/swap", {
+      Axios.post("http://127.0.0.1:5555/uploadMinePost/swap", {
         file1: this.imageList[0],
         file2: this.imageList[1],
       }).then((response) => (this.swapResponse = response,
@@ -120,7 +120,7 @@ export default {
   created() {
     const uploaderConfig = {
       // For Vagrant
-      uploadFileUrl: "http://localhost:5555/uploadMine/",
+      uploadFileUrl: "http://127.0.0.1:5555/uploadMinePost/",
       deleteFileUrl: "",
       showMessage: (vue, message) => {
         // using v-dialogs to show message

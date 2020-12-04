@@ -1,5 +1,6 @@
 output/*
 facialOutput/*
+*.out
 
 # exception to the rule
 !output/placeHolder
