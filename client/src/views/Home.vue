@@ -13,7 +13,16 @@
       text-variant="dark"
       lead="And perform Facial Detection!"
     >
-      <template #header>Get Image from Pixabay.com</template>
+      <template #header
+        >Get Image from
+        <a href="https://pixabay.com/"
+          ><img
+            style="width: 300px; height: auto"
+            src="https://pixabay.com/static/img/logo.svg"
+            alt="Pixabay" /></a
+        >.com</template
+      >
+
       <hr class="my-4" style="height: 2px; color: black" />
       <b-input-group
         style="width: 70%; margin: auto"
