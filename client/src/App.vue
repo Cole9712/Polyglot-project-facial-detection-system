@@ -2,7 +2,7 @@
   <div id="app">
     <div>
       <b-navbar type="dark" variant="dark">
-        <b-navbar-brand tag="h1" href="#">🚀Facial Detection Project🚀</b-navbar-brand>
+        <b-navbar-brand tag="h1">🚀Facial Detection Project🚀</b-navbar-brand>
         <b-collapse is-nav>
           <b-navbar-nav>
             <b-nav-item @click='$router.push({name:"Home"})'>Home</b-nav-item>
