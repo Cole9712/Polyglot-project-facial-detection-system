@@ -37,6 +37,7 @@
           >
         </div>
       </b-input-group>
+      <!-- Adapted and modified from https://medium.com/better-programming/how-to-add-infinite-scrolling-effect-to-a-vue-js-app-164280474274 -->
       <Results class="col-11 mt-2 pt-4 mx-auto" type="image" />
     </b-jumbotron>
   </div>
