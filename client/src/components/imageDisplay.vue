@@ -1,6 +1,6 @@
 <template>
     <div>
-        <img class="mx-auto" :src="url" alt="Image here." @load="scaleImg" style="height:600px; max-width=700px">
+        <img class="mx-auto" :src="url" alt="Image here." @load="scaleImg" style="height:600px; max-width:800px;">
     </div>
 </template>
 <script>
