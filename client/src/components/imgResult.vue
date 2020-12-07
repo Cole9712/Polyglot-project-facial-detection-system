@@ -15,7 +15,7 @@
         <md-card-expand>
           <md-card-actions>
             <md-button @click="popupFullImg(r.largeImageURL)"><b-icon icon="zoom-in"></b-icon></md-button>
-            <md-button>Facial Detection</md-button>
+            <md-button @click="startDetection(r.largeImageURL, r.id)">Detect Faces</md-button>
           </md-card-actions>
         </md-card-expand>
       </md-card>
@@ -24,6 +24,7 @@
 </template>
 <script>
 import imageDisplay from "./imageDisplay";
+import Axios from "axios";
 export default {
   name: "results",
   props: {
@@ -35,7 +36,9 @@ export default {
     },
   },
   data() {
-    return {};
+    return {
+      facialUrl: null
+    };
   },
   methods: {
     popupFullImg(imgUrl) {
@@ -48,6 +51,27 @@ export default {
         },
       });
     },
+    startDetection(url, inputID) {
+      var extension = url.split(/[#?]/)[0].split('.').pop().trim();
+      const key = this.$dlg.mask("Please Wait...  ", () => (
+          this.$dlg.modal(imageDisplay, {
+          title: "Detection Result",
+          width: 900,
+          height: 700,
+          params: {
+            url: this.facialUrl,
+          },
+        })));
+      Axios.post("http://127.0.0.1:5555/homeDetection", {
+        imgUrl: url,
+        id: inputID,
+        ext: extension,
+      }).then((response) => (
+        this.facialUrl = response.data.url,
+        console.log(this.receiveURL),
+        this.$dlg.close(key)
+      ));
+    }
   },
 };
 </script>

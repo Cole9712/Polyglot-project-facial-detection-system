@@ -16,7 +16,7 @@ func main() {
 	// router.GET("/", indexHandler(router))
 	router.POST("/uploadMinePost", fileUploadHandler)
 	router.POST("/uploadMinePost/swap", swapRequestHandler)
-	router.POST("/home", homeFacialHandler)
+	router.POST("/homeDetection", homeFacialHandler)
 	router.ServeFiles("/*filepath", http.Dir("./facialOutput"))
 	// router.ServeFiles("/homeOutput/*filepath", http.Dir("./homeOutput"))
 	corsHandler := cors.Default().Handler(router)
