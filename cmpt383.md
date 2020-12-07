@@ -18,4 +18,6 @@ May also implement other functions such as face similarity and login system.
 
 ## Deployment technology
 
-Docker Containers
+Vagrant with Ubuntu
+
+If deploying with Windows, run Vagrant commands via Admin Powershell/Command Prompt
