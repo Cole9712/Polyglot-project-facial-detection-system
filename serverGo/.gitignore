@@ -1,7 +1,9 @@
 output/*
 facialOutput/*
+homeOutput/*
 *.out
 
 # exception to the rule
 !output/placeHolder
 !facialOutput/placeHolder
+!homeOutput/placeHolder
