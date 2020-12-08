@@ -14,6 +14,7 @@
     :preview-width="700"
     :preview-height="525"
     button-text='Upload for Facial Detection'
+    :before-upload="beforeUpload"
     language='en'
     />
     
@@ -31,13 +32,19 @@
     },
     data() {
       return {
-        bgimage: require('../assets/bg1.jpg')
+        bgimage: require('../assets/bg1.jpg'),
+        key: null
       };
     },
     methods: {
       vUploadDone(f) {
+        this.$dlg.close(this.key)
         console.log(f)
-      }
+      },
+      beforeUpload: function (id, name) {
+        this.key = this.$dlg.mask("Uploading In Progress...",);
+        return true;
+      },
     },
     created() {
       const uploaderConfig = {
