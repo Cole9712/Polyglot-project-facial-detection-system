@@ -91,36 +91,20 @@ execute 'npm install -g @vue/cli' do
   returns [0,1]
 end
 
-# execute 'npm run serve' do
-#   cwd client_home
-#   user username
-#   environment 'HOME' => user_home
-# end
+execute 'go build 383/serverGo' do
+  cwd server_home
+  user username
+  environment 'HOME' => user_home
+end
 
-# execute 'npm install' do
-#   cwd client_home
-#   user rootname
-#   environment 'HOME' => user_home
-# end
+execute 'screen -dm go run 383/serverGo' do
+  cwd server_home
+  user username
+  environment 'HOME' => user_home
+end
 
-# execute 'npm install --save-dev node-sass' do
-#   cwd client_home
-#   user username
-#   environment 'HOME' => user_home
-# end
-# execute 'npm install holderjs' do
-#   cwd client_home
-#   user username
-#   environment 'HOME' => user_home
-# end
-# execute 'npm install fine-uploader' do
-#   cwd client_home
-#   user username
-#   environment 'HOME' => user_home
-# end
-
-
-
-
-
-
+execute 'screen -dm npm run serve' do
+  cwd client_home
+  user username
+  environment 'HOME' => user_home
+end
