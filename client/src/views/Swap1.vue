@@ -28,7 +28,7 @@
       button-text="Upload for Face Swap"
       language="en"
       :before-upload="beforeUpload"
-      :item-limit=2
+      :item-limit="2"
     />
   </div>
 </template>
@@ -51,33 +51,37 @@ export default {
   methods: {
     openResultModal() {
       this.$dlg.modal(imageDisplay, {
-        title : "Have Fun 😉",
+        title: "Have Fun 😉",
         width: 800,
         height: 700,
         params: {
-          url: this.receiveURL
-        }
-      }
-        
-      )
+          url: this.receiveURL,
+        },
+      });
     },
     loadingImg() {
-      const key = this.$dlg.mask("Processing...  ", () => (this.openResultModal()));
+      const key = this.$dlg.mask("Processing...  ", () =>
+        this.openResultModal()
+      );
       Axios.post("http://localhost:5555/uploadMinePost/swap", {
         file1: this.imageList[0],
         file2: this.imageList[1],
-      }).then((response) => (this.swapResponse = response,
-        this.receiveURL = response.data.url,
-        console.log(this.receiveURL),
-        this.$dlg.close(key)
-      ));
-      
+      }).then(
+        (response) => (
+          (this.swapResponse = response),
+          (this.receiveURL = response.data.url),
+          console.log(this.receiveURL),
+          this.$dlg.close(key)
+        )
+      );
     },
     vUploadDone(f) {
       if (f.length == 2) {
         this.$dlg.alert(
           "You Are Ready to Swap Faces. Do you CONFIRM to Swap? ",
-          () => {this.loadingImg()},
+          () => {
+            this.loadingImg();
+          },
           {
             messageType: "confirm",
             language: "en",

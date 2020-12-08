@@ -5,9 +5,15 @@
         <b-navbar-brand tag="h1">🚀Facial Detection Project🚀</b-navbar-brand>
         <b-collapse is-nav>
           <b-navbar-nav>
-            <b-nav-item @click='$router.push({name:"Home"})'>Home</b-nav-item>
-            <b-nav-item @click='$router.push({name:"UploadMine"})'>Facial Detect</b-nav-item>
-            <b-nav-item @click='$router.push({name:"Swapping"})'>Face Swapping</b-nav-item>
+            <b-nav-item @click="$router.push({ name: 'Home' })"
+              >Home</b-nav-item
+            >
+            <b-nav-item @click="$router.push({ name: 'UploadMine' })"
+              >Facial Detect</b-nav-item
+            >
+            <b-nav-item @click="$router.push({ name: 'Swapping' })"
+              >Face Swapping</b-nav-item
+            >
           </b-navbar-nav>
           <!-- right align content -->
           <b-navbar-nav class="ml-auto">
@@ -31,7 +37,6 @@ export default {
   data() {
     return {};
   },
-  
 };
 </script>
 
@@ -43,5 +48,4 @@ export default {
   text-align: center;
   color: #2c3e50;
 }
-
 </style>

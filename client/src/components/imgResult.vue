@@ -14,8 +14,12 @@
         </md-card-media>
         <md-card-expand>
           <md-card-actions>
-            <md-button @click="popupFullImg(r.largeImageURL)"><b-icon icon="zoom-in"></b-icon></md-button>
-            <md-button @click="startDetection(r.largeImageURL, r.id)">Detect Faces</md-button>
+            <md-button @click="popupFullImg(r.largeImageURL)"
+              ><b-icon icon="zoom-in"></b-icon
+            ></md-button>
+            <md-button @click="startDetection(r.largeImageURL, r.id)"
+              >Detect Faces</md-button
+            >
           </md-card-actions>
         </md-card-expand>
       </md-card>
@@ -37,7 +41,7 @@ export default {
   },
   data() {
     return {
-      facialUrl: null
+      facialUrl: null,
     };
   },
   methods: {
@@ -52,26 +56,29 @@ export default {
       });
     },
     startDetection(url, inputID) {
-      var extension = url.split(/[#?]/)[0].split('.').pop().trim();
-      const key = this.$dlg.mask("Please Wait...  ", () => (
-          this.$dlg.modal(imageDisplay, {
+      var extension = url.split(/[#?]/)[0].split(".").pop().trim();
+      const key = this.$dlg.mask("Please Wait...  ", () =>
+        this.$dlg.modal(imageDisplay, {
           title: "Detection Result",
           width: 900,
           height: 700,
           params: {
             url: this.facialUrl,
           },
-        })));
+        })
+      );
       Axios.post("http://localhost:5555/homeDetection", {
         imgUrl: url,
         id: inputID,
         ext: extension,
-      }).then((response) => (
-        this.facialUrl = response.data.url,
-        console.log(this.receiveURL),
-        this.$dlg.close(key)
-      ));
-    }
+      }).then(
+        (response) => (
+          (this.facialUrl = response.data.url),
+          console.log(this.receiveURL),
+          this.$dlg.close(key)
+        )
+      );
+    },
   },
 };
 </script>
