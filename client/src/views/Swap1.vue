@@ -17,7 +17,7 @@
       bg-variant="transparent"
     >
       <p class="my-5 text-left font-weight-light pl-4" style="font-size: 150%">
-        Max image size: 10MB
+        Upload 2 images, we will swap 2nd image's face onto 1st image.
       </p>
     </b-jumbotron>
     <v-uploader
