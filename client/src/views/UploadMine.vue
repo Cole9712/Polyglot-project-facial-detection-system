@@ -42,7 +42,7 @@
     created() {
       const uploaderConfig = {
         // For Vagrant
-        uploadFileUrl: 'http://127.0.0.1:5555/uploadMinePost',
+        uploadFileUrl: 'http://localhost:5555/uploadMinePost',
         // For Dev purposes
         // uploadFileUrl: 'http://localhost:8082/uploadMinePost',
         deleteFileUrl: '',
