@@ -8,6 +8,7 @@ import (
 	"net/http"
 	"os"
 	"os/exec"
+	"strconv"
 
 	"github.com/julienschmidt/httprouter"
 )
@@ -25,11 +26,12 @@ type SwapRequest struct {
 
 type HomeFacialRequest struct {
 	ImgUrl string `json:"imgUrl"`
-	ID     string `json:"id"`
+	ID     int    `json:"id"`
 	Ext    string `json:"ext"`
 }
 
 func homeFacialHandler(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
+	log.Print("Received Facial Detection Request for Home Page.")
 	// save file from request
 	var hfr HomeFacialRequest
 	err := json.NewDecoder(r.Body).Decode(&hfr)
@@ -42,7 +44,7 @@ func homeFacialHandler(w http.ResponseWriter, r *http.Request, p httprouter.Para
 		log.Fatal(e)
 	}
 	defer response.Body.Close()
-	path := "./homeOutput/" + hfr.ID + "." + hfr.Ext
+	path := "./homeOutput/" + strconv.Itoa(hfr.ID) + "." + hfr.Ext
 	f1, _ := os.OpenFile(path, os.O_WRONLY|os.O_CREATE, 0666)
 	defer f1.Close()
 
@@ -51,7 +53,7 @@ func homeFacialHandler(w http.ResponseWriter, r *http.Request, p httprouter.Para
 		log.Fatal(err)
 	}
 	fmt.Println("Save File Successfully!")
-	cmd := exec.Command("python3", "main.py", "detectAPI", hfr.ID+"."+hfr.Ext)
+	cmd := exec.Command("python3", "main.py", "detectAPI", strconv.Itoa(hfr.ID)+"."+hfr.Ext)
 	cmd.Stdout = os.Stdout
 	cmd.Stderr = os.Stderr
 	err = cmd.Run()
@@ -61,7 +63,7 @@ func homeFacialHandler(w http.ResponseWriter, r *http.Request, p httprouter.Para
 		return
 	}
 
-	returnResponse := Response{true, nil, "http://127.0.0.1:8082/" + hfr.ID + "." + hfr.Ext}
+	returnResponse := Response{true, nil, "http://127.0.0.1:8082/" + strconv.Itoa(hfr.ID) + "." + hfr.Ext + "?" + randomParamGen()}
 	w.Header().Set("Content-Type", "application/json")
 	err = json.NewEncoder(w).Encode(returnResponse)
 	if err != nil {
@@ -89,7 +91,7 @@ func swapRequestHandler(w http.ResponseWriter, r *http.Request, p httprouter.Par
 		return
 	}
 
-	response := Response{true, nil, "http://127.0.0.1:8082/" + sr.File1}
+	response := Response{true, nil, "http://127.0.0.1:8082/" + sr.File1 + "?" + randomParamGen()}
 	w.Header().Set("Content-Type", "application/json")
 	err = json.NewEncoder(w).Encode(response)
 	if err != nil {
@@ -123,7 +125,7 @@ func fileUploadHandler(w http.ResponseWriter, r *http.Request, p httprouter.Para
 	// w.Header().Set("Access-Control-Allow-Methods", " GET, POST, PATCH, PUT, DELETE, OPTIONS")
 	// w.Header().Set("Access-Control-Allow-Origin", "*")
 	// w.Header().Set("Access-Control-Allow-Headers", "Origin, Content-Type, X-Auth-Token")
-	response := Response{true, nil, "http://127.0.0.1:8082/" + filePath}
+	response := Response{true, nil, "http://127.0.0.1:8082/" + filePath + "?" + randomParamGen()}
 	w.Header().Set("Content-Type", "application/json")
 	json.NewEncoder(w).Encode(response)
 	if err != nil {

@@ -62,7 +62,7 @@ export default {
             url: this.facialUrl,
           },
         })));
-      Axios.post("http://127.0.0.1:5555/homeDetection", {
+      Axios.post("http://localhost:5555/homeDetection", {
         imgUrl: url,
         id: inputID,
         ext: extension,
