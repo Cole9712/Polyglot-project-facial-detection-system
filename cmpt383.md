@@ -1,5 +1,7 @@
 # Facial Decection Web System
 
+*To project marker(TA): The first build time might be as long as **20 minutes** due to the long compiling time for 'dlib' package, which is a essential library for facial landmark detection.I have tried my best and asked professor for suggestions about resolving this compiling time issue, unfortunately this is the only way so far. Thank you in advance for spending time deploying it. Ports used on localhost are `5555`, `8082` and Vagrant default `2222`, hope this can help you mark other projects while waiting for this project to be compiled.*
+
 ## Topic Idea
 
 If we want to perform some advanced/complex image processing on web only using JavaScript, it is really hard. To solve this, the project is to create a web system that can perform **facial detection** and **face swapping** from user uploaded images.
@@ -32,8 +34,6 @@ Vagrant with Ubuntu
 If you are deploying with Windows, run Vagrant commands as **Admin** since Windows only allows admin to create symbolic links.
 
 `Vagrant up`
-
-*Note: The first build time might be as long as **20 minutes** due to the long compiling time for 'dlib' package.I have tried my best and asked professor for suggestions about resolving this compiling time issue, unfortunately this is the only way so far.*
 
 After successful installation, access `http://localhost:5555/` on web browser to use front-end client.
 
