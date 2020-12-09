@@ -2,22 +2,61 @@
 
 ## Topic Idea
 
-To create a web system that collect pictures (or live stream camera)from user and return faces that detected.\
-May also implement other functions such as face similarity and login system.
+Creating a web system that can perform **facial detection** and **face swapping** from user uploaded images.\
+I also implemented facial detection using image API from [Pixabay.com](https://pixabay.com/), user can search images by keyword and detect faces on those images.
+
+---
 
 ## Languages
 
-- JavaScript
+### Front-end
+
+- JavaScript with [Vue](https://vuejs.org/)
+
+### Back-end
+
 - Go
-- Python with Anaconda
+- Python with OpenCV
+
+---
 
 ## Inter-language communication methods
 
-- message queue (RabbitMQ)
-- REST API
+- Command line execution (Go &leftarrow;&rightarrow; Python)
+- RPC server (JS &leftarrow;&rightarrow; Go)
+
+---
 
 ## Deployment technology
 
 Vagrant with Ubuntu
 
-If deploying with Windows, run Vagrant commands via Admin Powershell/Command Prompt
+---
+
+## Installation
+
+**Prerequisite:** Vagrant and VirtualBox.
+If you are deploying with Windows, run Vagrant commands as **Admin** since Windows only allows admin to create symbolic links.
+
+`Vagrant up`
+
+*Note: The first build time might be as long as **20 minutes** due to the long compiling time for 'dlib' package.I have tried my best and asked professor for suggestions about resolving this compiling time issue, unfortunately this is the only way so far.*
+
+After successful installation, access `http://localhost:5555/` on web browser to use front-end client.
+
+---
+
+## Features (with demo)
+
+The system can accept jpeg/jpg/png format image files.
+
+1. Home Page: search images via keywords, you can enlarge them or detect faces on them.
+![Api Demo](md_assets/api_demo.gif)
+
+2. Facial Detect Page: upload your own image to perform facial detection. *There are some sample images available to test in `test_imgs` directory under main repository.*
+![Detection Demo](md_assets/detection_demo.gif)
+
+3. Face Swapping Page: upload two images(say image 1 and image 2), an confirmation alert will popup and you can swap image 2's face onto image 1's person. *There are some sample images available to test in `test_imgs` directory under main repository.*
+![Swapping Demo](md_assets/face_swap_demo.gif)
+
+*All Pages can be accessed via top navigation bar.
