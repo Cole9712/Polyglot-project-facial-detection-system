@@ -27,6 +27,7 @@
       :multiple="true"
       button-text="Upload for Face Swap"
       language="en"
+      file-type-exts="jpeg,jpg,png"
       :before-upload="beforeUpload"
       :item-limit="2"
     />
