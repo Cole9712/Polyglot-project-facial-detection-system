@@ -5,8 +5,6 @@
 Creating a web system that can perform **facial detection** and **face swapping** from user uploaded images.\
 I also implemented facial detection using image API from [Pixabay.com](https://pixabay.com/), user can search images by keyword and detect faces on those images.
 
----
-
 ## Languages
 
 ### Front-end
@@ -18,20 +16,14 @@ I also implemented facial detection using image API from [Pixabay.com](https://p
 - Go
 - Python with OpenCV
 
----
-
 ## Inter-language communication methods
 
 - Command line execution (Go &leftarrow;&rightarrow; Python)
 - RPC server (JS &leftarrow;&rightarrow; Go)
 
----
-
 ## Deployment technology
 
 Vagrant with Ubuntu
-
----
 
 ## Installation
 
@@ -43,8 +35,6 @@ If you are deploying with Windows, run Vagrant commands as **Admin** since Windo
 *Note: The first build time might be as long as **20 minutes** due to the long compiling time for 'dlib' package.I have tried my best and asked professor for suggestions about resolving this compiling time issue, unfortunately this is the only way so far.*
 
 After successful installation, access `http://localhost:5555/` on web browser to use front-end client.
-
----
 
 ## Features (with demo)
 
