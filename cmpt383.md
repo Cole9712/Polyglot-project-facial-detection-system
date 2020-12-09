@@ -2,7 +2,8 @@
 
 ## Topic Idea
 
-Creating a web system that can perform **facial detection** and **face swapping** from user uploaded images.\
+If we want to perform some advanced/complex image processing on web only using JavaScript, it is really hard. To solve this, the project is to create a web system that can perform **facial detection** and **face swapping** from user uploaded images.
+For image processing, I implemented it with **Python** since it has large amount of supported libraries. Moreover, it is easy to handle requests concurrently using **Go** at backend.\
 I also implemented facial detection using image API from [Pixabay.com](https://pixabay.com/), user can search images by keyword and detect faces on those images.
 
 ## Languages
