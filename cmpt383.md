@@ -31,7 +31,7 @@ Vagrant with Ubuntu
 ## Installation
 
 **Prerequisite:** Vagrant and VirtualBox.
-If you are deploying with Windows, run Vagrant commands as **Admin** since Windows only allows admin to create symbolic links.
+**If you are deploying with Windows, make sure run Vagrant commands as Admin since Windows only allows admin to create symbolic links.**
 
 `Vagrant up`
 
