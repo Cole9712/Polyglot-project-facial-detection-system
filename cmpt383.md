@@ -44,10 +44,10 @@ The system can accept jpeg/jpg/png format image files.
 1. Home Page: search images via keywords, you can enlarge them or detect faces on them.
 ![Api Demo](md_assets/api_demo.gif)
 
-2. Facial Detect Page: upload your own image to perform facial detection. *There are some sample images available to test in `test_imgs` directory under main repository.*
+2. Facial Detect Page: upload your own image to perform facial detection. Note that due to the limitation of algorithm(not a AI engine after all), there might be some faces that could not be detected.*There are some sample images available to test in `test_imgs` directory.*
 ![Detection Demo](md_assets/detection_demo.gif)
 
-3. Face Swapping Page: upload two images(say image 1 and image 2), an confirmation alert will popup and you can swap image 2's face onto image 1's person. *There are some sample images available to test in `test_imgs` directory under main repository.*
+3. Face Swapping Page: upload two images(say image 1 and image 2), an confirmation alert will popup and you can swap image 2's face onto image 1's person. To maximize the face swapping result quality, please upload two images that share close resolution value.*There are some sample images available to test in `test_imgs` directory under main repository.*
 ![Swapping Demo](md_assets/face_swap_demo.gif)
 
 *All Pages can be accessed via top navigation bar.
