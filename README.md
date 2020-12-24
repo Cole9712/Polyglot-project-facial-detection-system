@@ -1,6 +1,4 @@
-# Facial Decection Web System
-
-*To project marker(TA): The first build time might be as long as **20 minutes** due to the long compiling time for 'dlib' package, which is an essential library for facial landmark detection.I have tried my best and asked the professor for suggestions about resolving this compiling time issue, unfortunately this is the only way so far. Thank you in advance for spending time deploying it. Ports used on localhost are `5555`, `8082` and Vagrant default `2222`, hope this can help you mark other projects while waiting for this project to be compiled.*
+# Facial Decection Web System (CMPT 383)
 
 ## Topic Idea
 
@@ -26,11 +24,14 @@ I also implemented facial detection using image API from [Pixabay.com](https://p
 
 ## Deployment technology
 
-Vagrant with Ubuntu
+Vagrant
 
 ## Installation
 
 **Prerequisite:** Vagrant and VirtualBox.
+
+The first build time might be as long as **20 minutes** due to the long compiling time for 'dlib' package, which is an essential library for facial landmark detection.
+
 **If you are deploying with Windows, make sure run Vagrant commands as Admin since Windows only allows admin to create symbolic links.**
 
 `vagrant up`
@@ -51,3 +52,9 @@ The system can accept jpeg/jpg/png format image files.
 ![Swapping Demo](md_assets/face_swap_demo.gif)
 
 *All Pages can be accessed via top navigation bar.
+
+## Dependencies
+
+- [v-uploader](https://github.com/TerryZ/v-uploader)
+- [v-dialogs](https://github.com/TerryZ/v-dialogs)
+- [Vue Material](https://vuematerial.io/)
