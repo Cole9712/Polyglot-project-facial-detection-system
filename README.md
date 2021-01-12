@@ -1,4 +1,4 @@
-# Facial Decection Web System (CMPT 383)
+# Facial Decection Web System
 
 ## Topic Idea
 
